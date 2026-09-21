@@ -1,0 +1,218 @@
+/* ===========================
+   Google Fonts
+   =========================== */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap');
+
+/* ===========================
+   CSS Variables (Theme)
+   =========================== */
+:root {
+  --bg-color: #fffefb;
+  --text-color: #3b3030;
+  --accent-color: #d81b60;
+  --title-color: #c2185b;
+  --bold-color: #b71c1c;
+  --name-color: #b71c1c;
+  --date-color: #6d5d5d;
+  --digit-color: #1a1616;
+  --stage-w: 1100px;
+  --stage-h: 680px;
+  --tree-shift-x: 260px;
+}
+
+/* ===========================
+   Global Styles
+   =========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-color);
+  font-family: 'Lora', 'Georgia', serif;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-color);
+  overflow: hidden;
+  min-width: 100vw;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===========================
+   Main Canvas Container
+   =========================== */
+#viewport {
+  position: relative;
+  width: var(--stage-w);
+  height: var(--stage-h);
+  max-width: 100vw;
+  max-height: 100svh;
+  overflow: hidden;
+  contain: layout size style;
+}
+
+#main {
+  position: relative;
+  width: var(--stage-w);
+  height: var(--stage-h);
+  transform-origin: top left;
+}
+
+#ground-canvas,
+#static-canvas,
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--stage-w);
+  height: var(--stage-h);
+  will-change: transform;
+}
+
+#ground-canvas {
+  z-index: 0;
+}
+
+#static-canvas {
+  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+#static-canvas.shifted {
+  transform: translateX(var(--tree-shift-x));
+}
+
+#canvas {
+  z-index: 2;
+}
+
+/* ===========================
+   Love Letter Content
+   =========================== */
+#letter {
+  position: absolute;
+  width: 470px;
+  left: 55px;
+  top: 18px;
+  display: none;
+  font-family: 'Lora', 'Georgia', serif;
+  font-size: 13.5px;
+  line-height: 1.38;
+  color: var(--text-color);
+  letter-spacing: 0.1px;
+  z-index: 3;
+}
+
+.letter-title {
+  font-family: 'Playfair Display', 'Lora', Georgia, serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--title-color);
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.letter-title.letter-title--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.letter-stanza {
+  margin-bottom: 7px;
+}
+
+.letter-stanza p {
+  margin: 0;
+  min-height: 1.38em;
+}
+
+.letter-bold {
+  font-weight: 700;
+  color: var(--bold-color);
+}
+
+.typewriter-cursor {
+  display: inline;
+  color: var(--title-color);
+  font-weight: 200;
+  animation: blink 0.6s step-end infinite;
+}
+
+.typewriter-cursor--done {
+  animation: blink 0.6s step-end 6;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ===========================
+   Time Counter Display
+   =========================== */
+#clock-box {
+  position: absolute;
+  left: 55px;
+  top: 528px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 3;
+}
+
+#clock-box.clock-box--visible {
+  opacity: 1;
+}
+
+#clock-text {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 19px;
+  color: var(--date-color);
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+}
+
+#clock-text .name {
+  color: var(--name-color);
+  font-weight: 700;
+}
+
+#clock {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.clock-unit {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+#clock .digit {
+  font-size: 45px;
+  font-weight: 700;
+  color: var(--digit-color);
+  line-height: 1;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  font-family: 'Inter', sans-serif;
+}
+
+#clock .unit-label {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #8c7b7b;
+  letter-spacing: 0.3px;
+}
+
+
